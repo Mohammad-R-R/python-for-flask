@@ -1,0 +1,127 @@
+def a(x):
+    for i in range (len(x)):
+        if x[i]>0:
+            x[i]="big"
+    return x
+
+print(a([5,-2,-3,4,-5]))
+________________________________________
+
+
+def func(list):
+    sum=0
+    for i in range(len(list)):
+        if(list[i]>0):
+            sum=sum+1
+    list.pop()
+    list.append(sum)
+    return list
+print(func([1,2,-3,-4,-2]))
+
+_________________________________________________________
+
+def func(list):
+    sum=0
+    for i in range(len(list)):
+        
+            sum=list[i]+ sum
+
+    return sum
+print(func([1,2,4,-1]))
+
+_______________________________________________________________
+
+def func(list):
+    sum=0
+    avg=0
+    for i in range(len(list)):
+
+            sum=list[i]+ sum
+    avg=sum/len(list)
+    return avg
+print(func([1,2,4,1]))
+__________________________________________________________________
+
+def func(list):
+
+    return len(list)
+print(func([1,2,4,1]))
+
+___________________________________________________________________
+def func(list):
+    min = list[0]
+    for i in range(len(list)):
+        if (list[i] < min):
+            min = list[i]
+
+
+
+    return min
+print(func([1,2,4,-11]))
+____________________________________________________________________
+
+def func(list):
+    max = list[0]
+    for i in range(len(list)):
+        if (list[i] > max):
+            max = list[i]
+
+
+
+    return max
+print(func([1,2,4,-11]))
+
+
+________________________________________________________________________
+
+
+def func(list):
+    sum = 0
+    avg = 0
+    newarray=[]
+    x=len(list)
+    for i in range(len(list)):
+        sum = list[i] + sum
+    avg = sum / len(list)
+
+    min = list[0]
+    for i in range(len(list)):
+        if (list[i] < min):
+            min = list[i]
+
+
+
+
+
+    max = list[0]
+    for i in range(len(list)):
+        if (list[i] > max):
+            max = list[i]
+
+    newarray.append("max is : {} ".format(max))
+    newarray.append("min is : {}".format(min))
+    newarray.append("avg is :{} ".format(avg))
+    newarray.append("length is : {}".format(x))
+
+
+
+    return newarray
+print(func([1,2,4,-11]))
+________________________________________________________________________-
+def func(list):
+    x=len(list)
+    for i in range(0,x,1*2):
+        x=x/2
+        temp=list[i]
+        list[i]=list[len(list)-i-1]
+        list[len(list)-i-1]=temp
+
+
+
+
+    return list
+
+print(func([1,2,4,5]))
+
+___________________________________________________________________________
+
