@@ -1,4 +1,7 @@
-from flask import Flask, app, session,render_template,redirect
+#done with moath
+
+from flask import Flask, app, session,render_template,redirect,request
+
 
 
 app =Flask(__name__)
@@ -18,13 +21,23 @@ def add_counter():
 
 @app.route("/destroy_session")
 def clear():
-    session.clear()
+   
     return redirect('/')
 
 @app.route("/add_two")
 def add():
     session['counter']+=2
     return render_template("counter.html",count=session['counter'])
+
+@app.route("/sep",methods=["POST"])
+def add1():
+    
+    
+    request.form['number']
+    session['counter']+= int(request.form['number'])
+    session['theplus']=request.form['number']
+    
+    return redirect('/count')
 
 
 
