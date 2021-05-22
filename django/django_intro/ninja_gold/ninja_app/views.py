@@ -37,4 +37,5 @@ def index(request):
 
 def clear(request):
     request.session['gold']=0
+    request.session['log']=[]
     return redirect ('/')
