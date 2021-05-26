@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- {% csrf_token %} -->
+</head>
+<body>
+    <!-- {% csrf_token %} -->
+    <h1>Add a New Show</h1>
+    {% csrf_token %}
+    <form action="shows/new" method="POST">
+        {% csrf_token %}
+        <label> Title
+            <input type="text" name="title"  >
+        </label>
+        <label >Network:
+            <input type="text" name="Network"  >
+        </label> 
+        <label for=""> Release Date:
+        <input type="date" name="date" >
+    </label>
+    <label > Descrption
+        <input type="text" name="Description">
+
+    </label>
+
+    <button type="submit" value="addshow"> Create</button>
+
+
+    {% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+    </form>
+    
+    
+   
+    
+</body>
+</html>

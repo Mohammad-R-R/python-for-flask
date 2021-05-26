@@ -1,3 +1,7 @@
+from django.db import reset_queries
 from django.shortcuts import render, HttpResponse
 def index(request):
-    return HttpResponse("this is the equivalent of @app.route('/')!")
+    return render(request,"book.html")
+
+def booky(request):
+    return render(request,"book.html")

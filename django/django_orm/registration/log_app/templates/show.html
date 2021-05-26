@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login and registraiton</title>
+</head>
+<body>
+    <h1>login</h1>
+    <form action="/login" method="POST">
+        <input type="hidden" name="login_type" value="login">
+        {% csrf_token %}
+        name: <input type="text" name="name" value="mohammad">
+        password: <input type="password" name="password" value="">
+        <button type="submit" name="submit">login</button>
+    </form>
+
+
+    <h1>registraiton</h1>
+    <form action="/login" method="POST">
+        <input type="hidden" name="login_type" value="registraiton">
+        {% csrf_token %}
+        name: <input type="text" name="name" value="mohammad">
+        password: <input type="password" name="password" value="">
+        <button type="submit" name="submit">register</button>
+    </form>
+
+
+    
+</body>
+</html>
