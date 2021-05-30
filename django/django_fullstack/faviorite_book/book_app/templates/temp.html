@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Success! Welcome, {{username.first_name}}</h1>
+    <p> added by:{{book_edit.uploaded_by.first_name}}</p>
+    <p> title:{{book_edit.title}}</p>
+    
+
+    {%if book_edit.uploaded_by == username%}
+    <form action="/update/{{book_edit.id}}" method="POST">
+        {% csrf_token %}
+    <textarea name="test" id="" cols="30" rows="10"  >{{book_edit.desc}}</textarea>
+    <button type="submit"> update</button>
+</form>
+    
+    {%else%}
+    <p>book Description:{{book_edit.desc}}</p>
+    {%endif%}
+
+    <h1>userswho like</h1>
+    {%for i in liked%}
+    i.title
+
+    {%endfor%}
+
+    
+    
+</body>
+</html>

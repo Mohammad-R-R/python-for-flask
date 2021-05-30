@@ -1,7 +1,5 @@
 from django.db import models
 import re	# the regex module
-from django.db.models import Model
-# Users._meta.get_field('email')._unique = True
 
 
 class BlogManager(models.Manager):
@@ -17,6 +15,9 @@ class BlogManager(models.Manager):
 
         if postData["password"]!=postData['confirm'] :
             errors['2000cc']='the password dosnt match'
+        if Users.objects.filter(email=postData['email']):
+            errors['in']='email in use'
+
         return errors
 
     def basic_validator2(self, postData):
@@ -26,28 +27,28 @@ class BlogManager(models.Manager):
             errors2["desc"] = "password  should be at least 10 characters"
 
         if len(postData["password1"])<10 :
-            errors2['2000cctarbu']='the password dosnt match'
+            errors2['2000cctarbu']='u have to write 10 char at least '
         return errors2
-
-        
     
     
 
 
         
-    class BlogManager(models.Manager):
-        def basic_validator(self, postData):    
-            errors = {}
-            EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-            if not EMAIL_REGEX.match(postData['email']):    # test whether a field matches the pattern            
-                errors['email'] = "Invalid email address!"
-            return errors
+class BookManager(models.Manager):
+    def basic_validator(self, postData):    
+        errors = {}
+        print("IN the models: %s" % postData)
+        if len(postData['title'])<1:
+            errors['one']='u have to enter at least 1 char'
+        if len(postData['desc'])<10:
+            errors['two']='u have to enter at least 10 char'
+        return errors
 
 
 class Users(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255,unique=True)
+    email = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -56,15 +57,16 @@ class Users(models.Model):
     objects=BlogManager()
 
 
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    desc=models.TextField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    uploaded_by=models.ForeignKey(Users,related_name="books_uploaded",on_delete=models.CASCADE)
+    users_who_like=models.ManyToManyField(Users,related_name="liked_books")
+    objects=BookManager()
 
 
-# def register(username,password):
-#     Users.objects.create(name=username,password=password)
 
-# def check_user(name,passed):
-#     user=Users.objects.filter(name=name)
-#     if user == None:
-#         return False
-#     if user[0].password == passed:
-#         return True
-#     return False
+
+

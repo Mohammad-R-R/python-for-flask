@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{%block content%}
+    <div style="display: flex;justify-content: space-between;">
+    <h2>CodingDojo Wall</h2>
+    <p style="margin-left: 450px;">Succsess ! Welcome Mr {{user.fname}} !</p>
+    <a href="/logout" style="margin-top: 12px;">Log off</a>
+</div>
+<hr>
+    
+{%for message in my_massege%}
+<div>
+    <p>{{message.user.first_name}} - {{message.created_at}} </p>
+    <p>{{message.message}}</p>
+    <div>
+    
+</div>
+<div>
+    <p>Commints</p> 
+    <form action="MakeComment/{{message.id}}" method="POST">
+        {% csrf_token %}
+        <textarea name="mycomment" id="comment" cols="90" rows="3"></textarea><br>
+        <input type="submit" value="Add Comment" style="margin-left: 600px;">
+    </form>
+        {%for comment in my_commints %}
+        <div>
+            <p>{{comment.user.first_name}}</p>
+            <p>{{comment.comment}}</p>
+            <form action="deletcomment/{{comment.id}}" method="POST">
+                {% csrf_token %}
+            <input type="submit" value="Delet comment">
+            </form>
+        </div>
+        {%endfor%}
+
+</div>
+{%endfor%}
+<div>
+    <a href="/welcome">back</a>
+</div>
+{%endblock%}

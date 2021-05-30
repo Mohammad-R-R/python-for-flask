@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    text{
+        display: block;
+    }
+</style>
+<body>
+    <!-- Welcome {{request.session.user.firstname}} {{request.session.user.last_name}} {{request.session.user.id}} {{request.session.user.email}} -->
+    <h1>Success! Welcome, {{z.first_name}}</h1>
+
+    <h2>Add a Favorite Book</h2>
+    <form action="/add_book" method="POST">
+        {% csrf_token %}
+        Title:<input type="text" name="title">
+        Description:<textarea name="desc"  cols="30" rows="10"></textarea>
+        <!-- <input type="hidden" name="u1" value="{{request.session.user.id}}"> -->
+        <button type="submit">Add</button>
+    </form>
+    {% for i in x %}
+   <a href="/books/{{i.id}}">{{i.title}}</a> 
+    <li>{{i.uploaded_by.first_name}} {{i.uploaded_by.last_name}}</li>
+    <a href="addto_fav/{{i.uploaded_by.id}}/{{i.id}}">Add to Favorite</a>
+    
+    {%endfor%}
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+         <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+        </ul>
+        {% endif %}
+    
+    <a href="/logout">logout</a>
+</body>
+</html>

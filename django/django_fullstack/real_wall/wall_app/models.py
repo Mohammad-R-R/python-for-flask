@@ -1,7 +1,5 @@
 from django.db import models
 import re	# the regex module
-from django.db.models import Model
-# Users._meta.get_field('email')._unique = True
 
 
 class BlogManager(models.Manager):
@@ -28,8 +26,6 @@ class BlogManager(models.Manager):
         if len(postData["password1"])<10 :
             errors2['2000cctarbu']='the password dosnt match'
         return errors2
-
-        
     
     
 
@@ -54,17 +50,3 @@ class Users(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     objects=BlogManager()
-
-
-
-
-# def register(username,password):
-#     Users.objects.create(name=username,password=password)
-
-# def check_user(name,passed):
-#     user=Users.objects.filter(name=name)
-#     if user == None:
-#         return False
-#     if user[0].password == passed:
-#         return True
-#     return False

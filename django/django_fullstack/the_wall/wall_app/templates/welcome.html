@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+    {%block content%}
+    
+<hr>
+    <div class="message">
+    <form action="message" method="POST">
+        {% csrf_token %} 
+        <textarea name="messagearea" id="messagearea" cols="100" rows="10" style="margin-top: 30px;"></textarea><br>
+        <input type="submit" value="Post a message" style="margin-left: 700px;" class="btn btn-success" >
+    </form>
+</div>
+{%for message in my_massege%}
+<div>
+    <p>{{message.user.first_name}} - {{message.created_at}} </p>
+    <p><a href="showCommenits/{{message.id}}">{{message.message}}</a></p>
+    <div>
+    <form action="delet_message/{{message.id}}">
+        <input type="submit" value="Delete Message" class="btn btn-info">
+    </form>
+</div>
+<div>
+{%endfor%}
+{%endblock%}

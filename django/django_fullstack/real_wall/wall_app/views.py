@@ -4,7 +4,6 @@ from login_app.models import *
 from django.contrib import messages
 import bcrypt
 
-
 def index (request):
     return render(request,'index.html')
 
@@ -33,16 +32,12 @@ def reg(request):
             Users.objects.create(first_name= request.POST['first_name'],last_name = request.POST['last_name'],email=request.POST['email'],password=pw_hash)
             users=Users.objects.filter(email=request.POST['email'])
             logged_user=users[0]
-            
-           
             # secondlog=users[1]
             
             # if logged_user.email==secondlog.email :
             #     print("allready exisit")
-            # context={
-            #     'x':Users.objects.all()
-            # }
             request.session['user']={
+                'id':logged_user.id,
                 'firstname':logged_user.first_name,
                 'last_name':logged_user.last_name,
                 'email':logged_user.email
@@ -70,8 +65,7 @@ def the_log(request):
         email=request.POST['email2']
         user =Users.objects.filter(email=email)
         print("the error12")
-        # user = Users.objects.get(email=request-----3
-        # .POST['email2'])
+        # user = Users.objects.get(email=request.POST['email2'])
         # user2=Users.objects.filter
         # emaill=user[0].email
         # passd = Users.objects.filter(k.password)=)
@@ -87,12 +81,10 @@ def the_log(request):
             else:
                 print("failed password")
     
-                return HttpResponse('password errorz')
+                return HttpResponse('password error')
         else:
             return HttpResponse('nothing')
         
 def logout(request):
     request.session.flush()
     return redirect("/")
-
-
